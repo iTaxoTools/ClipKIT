@@ -1,4 +1,5 @@
 from collections import Counter
+from typing import List
 
 from Bio.Align import MultipleSeqAlignment
 import numpy as np
@@ -24,7 +25,7 @@ def smart_gap_threshold_determination(
     return greatest_diff_in_slopes(slopes, gaps_arr)
 
 
-def greatest_diff_in_slopes(slopes: list[float], gaps_arr: np.array) -> float:
+def greatest_diff_in_slopes(slopes: List[float], gaps_arr: np.array) -> float:
     diffs = []
     # if there is only one slope, use that value to determine
     # the threshold. Otherwise, calculate the greatest difference
@@ -40,7 +41,7 @@ def greatest_diff_in_slopes(slopes: list[float], gaps_arr: np.array) -> float:
     return gaps_arr[diffs.index(max(diffs))][0]
 
 
-def gap_to_gap_slope(gaps_arr: np.array, alignment_length: int) -> list[float]:
+def gap_to_gap_slope(gaps_arr: np.array, alignment_length: int) -> List[float]:
     sum_sites_current = gaps_arr[0][1] / alignment_length
     sum_sites_previous = 0
     slopes = []
@@ -56,7 +57,7 @@ def gap_to_gap_slope(gaps_arr: np.array, alignment_length: int) -> list[float]:
 
 def get_gaps_distribution(
     alignment: MultipleSeqAlignment, gap_chars: list
-) -> list[float]:
+) -> List[float]:
     msa_array = np.array([list(rec) for rec in alignment])
     gaps_dist = (np.isin(msa_array, gap_chars)).mean(axis=0)
 

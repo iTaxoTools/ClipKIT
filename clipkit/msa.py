@@ -3,7 +3,7 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 import numpy as np
 from itertools import chain
-from typing import Union
+from typing import Union, Tuple
 
 from .modes import TrimmingMode
 from .site_classification import (
@@ -94,7 +94,7 @@ class MSA:
     def stats(self) -> TrimmingStats:
         return TrimmingStats(self)
 
-    def is_any_entry_sequence_only_gaps(self) -> tuple[bool, Union[str, None]]:
+    def is_any_entry_sequence_only_gaps(self) -> Tuple[bool, Union[str, None]]:
         for idx, row in enumerate(self.trimmed):
             if np.all(row == row[0]) and (  # all values the same
                 row[0] in self.gap_chars

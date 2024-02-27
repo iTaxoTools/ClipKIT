@@ -1,4 +1,5 @@
 import re
+from typing import List
 
 from Bio import SeqIO
 from Bio.Align import MultipleSeqAlignment
@@ -17,7 +18,7 @@ class SeqType(Enum):
     nt = "nt"
 
 
-def remove_gaps(seq: str, gap_chars: list[str] = DEFAULT_AA_GAP_CHARS) -> str:
+def remove_gaps(seq: str, gap_chars: List[str] = DEFAULT_AA_GAP_CHARS) -> str:
     pattern = "|".join([re.escape(char) for char in gap_chars])
     return re.sub(pattern, "", seq)
 
@@ -37,14 +38,14 @@ def get_seq_type(alignment: MultipleSeqAlignment) -> SeqType:
     return sequence_type
 
 
-def get_gap_chars(seq_type: SeqType) -> list[str]:
+def get_gap_chars(seq_type: SeqType) -> List[str]:
     if seq_type == SeqType.nt:
         return DEFAULT_NT_GAP_CHARS
     else:
         return DEFAULT_AA_GAP_CHARS
 
 
-def create_msa(alignment: MultipleSeqAlignment, gap_chars: list[str] = None) -> MSA:
+def create_msa(alignment: MultipleSeqAlignment, gap_chars: List[str] = None) -> MSA:
     """
     Create MSA class
     """

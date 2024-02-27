@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import Tuple
 from .logger import log_file_logger
 
 from Bio import AlignIO
@@ -20,7 +21,7 @@ class FileFormat(Enum):
 
 def get_alignment_and_format(
     input_file_name: str, file_format: FileFormat
-) -> tuple[MultipleSeqAlignment, FileFormat]:
+) -> Tuple[MultipleSeqAlignment, FileFormat]:
     """
     Automatically determines what type of input file was used
     and reads in the alignment file
