@@ -1,8 +1,6 @@
 from os import path
 from setuptools import setup
 
-from clipkit.version import __version__
-
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, "README.md"), encoding="utf-8") as f:
@@ -30,7 +28,7 @@ setup(
     packages=["clipkit"],
     classifiers=CLASSIFIERS,
     entry_points={"console_scripts": ["clipkit = clipkit.clipkit:main"]},
-    version=__version__,
+    version="2.2.3.dev1",
     include_package_data=True,
     install_requires=REQUIRES,
 )
